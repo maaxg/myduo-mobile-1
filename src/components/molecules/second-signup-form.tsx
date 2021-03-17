@@ -1,40 +1,56 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
 import {Container, Fonts, InputStyle} from '../../styles';
 import {Input} from '../atoms';
 
-const SecondSignUpForm: React.FC = ({}) => {
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [genre, setGenre] = useState('');
-  const [birthDate, setBirthDate] = useState('');
+export interface Props {
+  phone: string;
+  setPhone: (value: string) => void;
+  email: string;
+  setEmail: (value: string) => void;
+  password: string;
+  setPassword: (value: string) => void;
+  confirmPassword: string;
+  setConfirmPassword: (value: string) => void;
+}
+
+const SecondSignUpForm: React.FC<Props> = ({
+  phone,
+  setPhone,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  confirmPassword,
+  setConfirmPassword,
+}) => {
   return (
     <>
       <View style={Container.container.ROW}>
         <Input
           inputStyle={[InputStyle.input.SIGNUP_SPLIT, {marginRight: '3%'}]}
           placeholder={'Celular'}
-          value={name}
-          onChange={(text) => setName(text)}
+          value={phone}
+          onChange={(text) => setPhone(text)}
         />
         <Input
           inputStyle={InputStyle.input.SIGNUP_SPLIT}
           placeholder={'Email'}
-          value={lastName}
-          onChange={(text) => setLastName(text)}
+          value={email}
+          onChange={(text) => setEmail(text)}
         />
       </View>
       <Input
         inputStyle={InputStyle.input.SIGNUP}
         placeholder={'Senha'}
-        value={genre}
-        onChange={(text) => setGenre(text)}
+        value={password}
+        onChange={(text) => setPassword(text)}
       />
       <Input
         inputStyle={InputStyle.input.SIGNUP}
         placeholder={'Confirmar senha'}
-        value={birthDate}
-        onChange={(text) => setBirthDate(text)}
+        value={confirmPassword}
+        onChange={(text) => setConfirmPassword(text)}
       />
       <View style={{width: '90%'}}>
         <Text style={Fonts.fonts.PRIVACY_POLICY}>

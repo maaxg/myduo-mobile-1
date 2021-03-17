@@ -3,11 +3,27 @@ import {View} from 'react-native';
 import {Container, InputStyle} from '../../styles';
 import {Input} from '../atoms';
 
-const SignUpForm: React.FC = ({}) => {
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [genre, setGenre] = useState('');
-  const [birthDate, setBirthDate] = useState('');
+export interface Props {
+  name: string;
+  setName: (value: string) => void;
+  lastName: string;
+  setLastName: (value: string) => void;
+  genre: string;
+  setGenre: (value: string) => void;
+  birthDate: string;
+  setBirthDate: (value: string) => void;
+}
+
+const SignUpForm: React.FC<Props> = ({
+  name,
+  setName,
+  lastName,
+  setLastName,
+  genre,
+  setGenre,
+  birthDate,
+  setBirthDate,
+}) => {
   return (
     <>
       <Input
