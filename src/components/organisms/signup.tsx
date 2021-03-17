@@ -21,6 +21,7 @@ const SignUp: React.FC<Props> = ({setIsVisible}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
   return (
     <View style={Container.container.SIGNUP}>
       <View style={Container.container.ROW}>
