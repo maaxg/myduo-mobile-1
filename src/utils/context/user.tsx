@@ -1,9 +1,9 @@
-import React, {createContext, useState, ReactChildren} from 'react';
-import {User, Login, Context} from '../types/user-types';
+import React, {createContext, useState} from 'react';
+import {User, Login, ContextProps} from '../types/user-types';
 import {createUser, createSession} from '../../services/user';
-export const UserContext = createContext<Context>();
+export const UserContext = createContext<ContextProps>({} as ContextProps);
 
-const UserProvider = (children: ReactChildren) => {
+const UserProvider: React.FC = ({children}) => {
   const [user, setUser] = useState<User>();
 
   async function signUp(userParam: User) {
@@ -14,7 +14,7 @@ const UserProvider = (children: ReactChildren) => {
     setUser(await createSession(userParam));
   }
   return (
-    <UserContext.Provider value={{user, signUp, signIn}}>
+    <UserContext.Provider value={{user, signIn, signUp}}>
       {children}
     </UserContext.Provider>
   );

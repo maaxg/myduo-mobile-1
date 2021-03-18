@@ -10,11 +10,15 @@
 
 import React from 'react';
 import Navigator from './navigations';
-
+import UserProvider from './utils/context/user';
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
-  return <Navigator />;
+  return (
+    <UserProvider>
+      <Navigator />
+    </UserProvider>
+  );
 };
 
 export default App;

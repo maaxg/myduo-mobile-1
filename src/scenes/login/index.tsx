@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Image, ImageBackground} from 'react-native';
+import {ContextProps} from '../../utils/types/user-types';
 import {
   ImagesStyles,
   Container,
@@ -11,16 +12,27 @@ import {
 import {Input, Button} from '../../components/atoms';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SignUp} from '../../components/organisms';
-
+import {UserContext} from '../../utils/context/user';
+import {useNavigation} from '@react-navigation/native';
 const Background = require('../../assets/images/background.png');
 const ShortLogo = require('../../assets/images/myduo-shortlogo.png');
 
 const Login: React.FC = ({}) => {
+  const {navigation} = useNavigation();
+  const {signIn} = useContext(UserContext);
   //login state
-  const [email, setEmail] = useState('');
-  const [password, setPassoword] = useState('');
-  const [isSignUpVisible, setIsSignUpVisible] = useState(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassoword] = useState<string>('');
+  const [isSignUpVisible, setIsSignUpVisible] = useState<boolean>(false);
 
+  async function login() {
+    const loginParams = {
+      email: email,
+      password: password,
+    };
+    signIn(loginParams);
+    navigation.navigate('Home');
+  }
   return (
     <ImageBackground source={Background} style={ImagesStyles.BACKGROUND}>
       <View style={Container.container.GENERAL}>
@@ -43,7 +55,7 @@ const Login: React.FC = ({}) => {
               />
               <Button
                 description={'Entrar'}
-                onPress={() => {}}
+                onPress={() => login()}
                 buttonStyle={ButtonStyle.buttons.LOGIN}
                 descriptionStyle={Fonts.fonts.GENERAL}
               />

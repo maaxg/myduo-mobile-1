@@ -11,7 +11,7 @@ export interface Login {
   email: string;
   password: string;
 }
-export interface Context {
+export interface ContextProps {
   user: User;
   signUp: (value: User) => void;
   signIn: (value: Login) => void;

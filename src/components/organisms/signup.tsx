@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text} from 'react-native';
 import {Color, Container, Fonts, ButtonStyle} from '../../styles';
 import {Button, ButtonIcon} from '../atoms';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SignUpForm, SecondSignUpForm} from '../molecules';
+import {UserContext} from '../../utils/context/user';
 
 export interface Props {
   isVisible: boolean;
@@ -11,6 +12,7 @@ export interface Props {
 }
 
 const SignUp: React.FC<Props> = ({setIsVisible}) => {
+  const {signUp} = useContext(UserContext);
   // SignUp state
   const [isFirstForm, setIsFirstForm] = useState(true);
   const [name, setName] = useState('');
@@ -21,6 +23,19 @@ const SignUp: React.FC<Props> = ({setIsVisible}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  async function registrationUser() {
+    const registrationParams = {
+      name: name,
+      lastName: lastName,
+      genre: genre,
+      birthDate: birthDate,
+      phone: phone,
+      email: email,
+      password: password,
+    };
+    signUp(registrationParams);
+  }
 
   return (
     <View style={Container.container.SIGNUP}>
@@ -83,9 +98,9 @@ const SignUp: React.FC<Props> = ({setIsVisible}) => {
               '3%',
             )}
             descriptionStyle={Fonts.fonts.GENERAL}
-            onPress={() => {
-              setIsFirstForm(false);
-            }}
+            onPress={() =>
+              isFirstForm ? setIsFirstForm(false) : registrationUser()
+            }
           />
         </View>
       </ScrollView>
